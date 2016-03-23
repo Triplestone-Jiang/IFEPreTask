@@ -13,9 +13,19 @@ html {
   font-family: "Microsoft YaHei", Arial, sans-serif;
   font-weight: 300;
   cursor: default;
+  text-align: center;
 }
 a {
   text-decoration: none;
+}
+button {
+  font-family: "Microsoft YaHei", Arial, sans-serif;
+  cursor: pointer;
+  text-align: center;
+}
+ul,
+ol {
+  list-style: none;
 }
 header,
 section {
@@ -26,18 +36,13 @@ section {
   top: 50%;
   transform: translateY(-50%);
 }
-.horizontalCenter {
-  position: absolute;
-  left: 50%;
-  transform: translateX(-50%);
-}
 body {
   min-width: 1280px;
 }
 header {
   height: 60px;
 }
-header #logo {
+header .logo {
   font-size: 2rem;
   font-weight: bold;
   background: url("img/book.png") no-repeat center left;
@@ -49,13 +54,11 @@ header #logo {
   float: left;
 }
 header nav {
+  float: right;
+  margin: 0 100px 0 0;
   height: 60px;
-  top: 0;
-  position: absolute;
-  right: 100px;
 }
 header nav ul {
-  list-style: none;
   height: 60px;
   text-align: center;
   font-size: 1.6rem;
@@ -68,8 +71,7 @@ header nav ul li {
 header nav ul li a {
   display: block;
 }
-header nav ul li a:link,
-header nav ul li a:visited {
+header nav ul li a:link {
   color: #32353E;
 }
 header nav ul li a:hover {
@@ -80,99 +82,94 @@ header nav ul li:last-of-type {
   background: url(img/icon-men.png) no-repeat center;
   background-position-x: 20%;
 }
-#sec1 {
+.sec1 {
   min-height: 690px;
   background: url("img/bg.jpg") no-repeat center;
   background-size: cover;
+  text-align: left;
 }
-#sec1 #intro {
-  left: 400px;
+.sec1 .intro {
+  left: 16%;
 }
-#sec1 #intro p {
-  margin: 0 0 30px;
+.sec1 .intro p {
+  margin: 0 0 30px 0;
   color: #FFFFFF;
 }
-#sec1 #intro p:first-of-type {
+.sec1 .intro p:first-of-type {
   font-size: 6rem;
 }
-#sec1 #intro p:last-of-type {
-  font-size: 2em;
+.sec1 .intro p:last-of-type {
+  font-size: 2rem;
 }
-#sec1 #intro button {
-  cursor: pointer;
+.sec1 .intro button {
   background-color: #e74f4d;
   border: none;
   color: #FFFFFF;
-  text-align: center;
   width: 280px;
   height: 60px;
   line-height: 60px;
   font-size: 2.6rem;
-  font-family: "Microsoft YaHei", Arial, sans-serif;
 }
-#sec2 {
+.sec2 {
   height: 260px;
 }
-#sec2 .tips {
+.sec2 .tips {
   width: 25%;
   float: left;
-  text-align: center;
   font-size: 1.8rem;
 }
-#sec2 .tips span {
+.sec2 .tips span {
   display: inline-block;
   width: 100%;
   border-right: 2px solid #aaa;
 }
-#sec2 .icon {
+.sec2 .icon {
   background: url("img/ions.png") no-repeat center;
   height: 42px;
   width: 42px;
   background-size: 168px 42px;
   margin: 60px auto;
 }
-#sec2 #tips1 .icon {
+.sec2 .tips1 .icon {
   background-position: 0 0;
 }
-#sec2 #tips2 .icon {
+.sec2 .tips2 .icon {
   background-position: -42px 0;
 }
-#sec2 #tips3 .icon {
+.sec2 .tips3 .icon {
   background-position: -84px 0;
 }
-#sec2 #tips4 .icon {
+.sec2 .tips4 .icon {
   background-position: -126px 0;
 }
-#sec2 #tips4 span {
+.sec2 .tips4 span {
   border: none;
 }
-#sec3 {
+.sec3 {
   background-color: #ededed;
   height: 360px;
-  text-align: center;
 }
-#sec3 #banner {
+.sec3 .banner {
   padding: 80px 0;
 }
-#sec3 p {
+.sec3 p {
   color: #aaa;
   font-size: 4rem;
   font-weight: 500;
 }
-#sec4 {
+.sec4 {
   height: 350px;
   background: url("img/map.jpg") no-repeat center;
   background-size: cover;
   color: #FFFFFF;
-  text-align: center;
   padding: 60px 0;
 }
-#sec4 p:first-of-type {
+.sec4 p:first-of-type {
   font-size: 2.4rem;
   font-weight: 500;
   margin: 18px auto;
 }
-#sec4 p:first-of-type:after {
+.sec4 p:first-of-type:after {
   content: "";
   width: 30px;
   height: 3px;
@@ -180,14 +177,14 @@ header nav ul li:last-of-type {
   background-color: #FFFFFF;
   margin: 8px auto;
 }
-#sec4 p:last-of-type {
+.sec4 p:last-of-type {
   font-size: 1.6rem;
 }
-#sec4 #selectList {
+.sec4 .selectList {
   width: 100%;
   margin: 50px auto;
 }
-#sec4 #selectList select {
+.sec4 .selectList select {
   width: 240px;
   height: 40px;
   background: #FFFDFD url("img/arrow.png") no-repeat center right;
@@ -202,58 +199,53 @@ header nav ul li:last-of-type {
   -moz-appearance: none;
   appearance: none;
 }
-#sec4 #selectList button {
+.sec4 .selectList button {
   background-color: #e74f4d;
   border: none;
   color: #FFFFFF;
-  text-align: center;
   width: 240px;
   height: 40px;
   font-size: 1.8rem;
   line-height: 1.8rem;
-  font-family: "Microsoft YaHei", Arial, sans-serif;
   margin: 0 1%;
-  cursor: pointer;
 }
-#sec5 {
+.sec5 {
   height: 600px;
   padding: 100px 0;
 }
-#sec5 #container {
+.sec5 .container {
   width: 1000px;
   height: 450px;
   margin: 0 auto;
 }
-#sec5 #container .show {
+.sec5 .container .show {
   width: 22.2%;
   margin: 0 1.6%;
   float: left;
 }
-#sec5 #container .show .pic {
+.sec5 .container .show .pic {
   padding: 16px 10px;
   border: 1px solid #ededed;
 }
-#sec5 #container .show:last-of-type {
+.sec5 .container .show:last-of-type {
   margin-right: 0;
 }
-#sec5 #container .show p {
+.sec5 .container .show p {
   margin: 16px 0;
-  text-align: center;
 }
-#sec5 #container .show p:first-of-type {
+.sec5 .container .show p:first-of-type {
   font-weight: 500;
   font-size: 1.2rem;
 }
-#sec5 #container #show2 p:first-of-type {
+.sec5 .container .show2 p:first-of-type {
   font-size: 2.2rem;
   text-align: justify;
   text-align-last: justify;
 }
-#sec6 {
-  text-align: center;
+.sec6 {
   height: 600px;
 }
-#sec6 #sec6Left {
+.sec6 .sec6Left {
   position: relative;
   background: url("img/bg2.jpg") no-repeat center;
   background-size: cover;
@@ -262,24 +254,24 @@ header nav ul li:last-of-type {
   color: #FFFFFF;
   float: left;
 }
-#sec6 #sec6Left .verticalMiddle {
+.sec6 .sec6Left .verticalMiddle {
   width: 100%;
 }
-#sec6 #sec6Left .verticalMiddle p {
+.sec6 .sec6Left .verticalMiddle p {
   margin: 8px 0;
 }
-#sec6 #sec6Left .verticalMiddle p:first-of-type {
+.sec6 .sec6Left .verticalMiddle p:first-of-type {
   font-size: 4rem;
 }
-#sec6 #sec6Left .verticalMiddle p:nth-of-type(2) {
+.sec6 .sec6Left .verticalMiddle p:nth-of-type(2) {
   font-weight: 500;
   font-size: 14rem;
 }
-#sec6 #sec6Left .verticalMiddle p:nth-of-type(3),
-#sec6 #sec6Left .verticalMiddle p:last-of-type {
+.sec6 .sec6Left .verticalMiddle p:nth-of-type(3),
+.sec6 .sec6Left .verticalMiddle p:last-of-type {
   font-size: 3rem;
 }
-#sec6 #sec6Left:after {
+.sec6 .sec6Left:after {
   content: "";
   position: absolute;
   display: block;
@@ -290,32 +282,31 @@ header nav ul li:last-of-type {
   border-top: 16px solid transparent;
   border-bottom: 16px solid transparent;
 }
-#sec6 #sec6Right {
-  text-align: center;
+.sec6 .sec6Right {
   height: 600px;
   position: relative;
   width: 34%;
   float: left;
 }
-#sec6 #sec6Right .verticalMiddle {
+.sec6 .sec6Right .verticalMiddle {
   width: 100%;
 }
-#sec6 #sec6Right .verticalMiddle p {
+.sec6 .sec6Right .verticalMiddle p {
   width: 50%;
   margin: 20px auto;
   font-size: 1.2rem;
   color: #aaa;
   line-height: 3rem;
 }
-#sec6 #sec6Right .verticalMiddle p span {
+.sec6 .sec6Right .verticalMiddle p span {
   font-size: 3rem;
   position: relative;
 }
-#sec6 #sec6Right .verticalMiddle p span:first-of-type {
+.sec6 .sec6Right .verticalMiddle p span:first-of-type {
   margin: 0 36px 0 0;
   color: #888888;
 }
-#sec6 #sec6Right .verticalMiddle p span:first-of-type:after {
+.sec6 .sec6Right .verticalMiddle p span:first-of-type:after {
   display: block;
   position: absolute;
   top: 2px;
@@ -327,29 +318,27 @@ header nav ul li:last-of-type {
   -webkit-transform: rotate(45deg);
   transform: rotate(45deg);
 }
-#sec6 #sec6Right .verticalMiddle p span:last-of-type {
+.sec6 .sec6Right .verticalMiddle p span:last-of-type {
   color: #e74f4d;
 }
-#sec6 #sec6Right .verticalMiddle button {
+.sec6 .sec6Right .verticalMiddle button {
   margin: 40px auto;
   border: 1px solid #e74f4d;
   font-size: 1.6rem;
   line-height: 40px;
   color: #e74f4d;
   background-color: #FFFFFF;
-  font-family: "Microsoft YaHei", Arial, sans-serif;
 }
-#sec6 #sec6Right .verticalMiddle button a {
+.sec6 .sec6Right .verticalMiddle button a {
   display: block;
   cursor: pointer;
   width: 120px;
   height: 40px;
 }
-#sec6 #sec6Right .verticalMiddle button a:link,
-#sec6 #sec6Right .verticalMiddle button a:visited {
+.sec6 .sec6Right .verticalMiddle button a:link {
   color: #e74f4d;
 }
-#sec6 #sec6Right .verticalMiddle button a:hover {
+.sec6 .sec6Right .verticalMiddle button a:hover {
   background-color: #e74f4d;
   color: #FFFFFF;
   border-color: #e74f4d;
@@ -357,10 +346,10 @@ header nav ul li:last-of-type {
   -o-transition: all 0.3s;
   transition: all 0.3s;
 }
-#sec6 #sec6Right .verticalMiddle #choosePoint ul {
+.sec6 .sec6Right .verticalMiddle .choosePoint ul {
   margin: auto;
 }
-#sec6 #sec6Right .verticalMiddle #choosePoint ul li {
+.sec6 .sec6Right .verticalMiddle .choosePoint ul li {
   list-style: none;
   display: inline-block;
   width: 15px;
@@ -370,23 +359,22 @@ header nav ul li:last-of-type {
   border: 1px solid #888888;
   cursor: pointer;
 }
-#sec6 #sec6Right .verticalMiddle #choosePoint ul .selected {
+.sec6 .sec6Right .verticalMiddle .choosePoint ul .selected {
   background-color: #888888;
 }
-#sec7 {
+.sec7 {
   height: 500px;
-  text-align: center;
 }
-#sec7 .sec7 {
+.sec7 .sec7 {
   position: relative;
   width: 33%;
   float: left;
   height: 500px;
 }
-#sec7 .sec7:first-of-type {
+.sec7 .sec7:first-of-type {
   background-color: #e74f4d;
 }
-#sec7 .sec7:nth-of-type(2):after {
+.sec7 .sec7:nth-of-type(2):after {
   content: "";
   position: absolute;
   display: block;
@@ -397,20 +385,20 @@ header nav ul li:last-of-type {
   border-top: 16px solid transparent;
   border-bottom: 16px solid transparent;
 }
-#sec7 .sec7 .verticalMiddle {
+.sec7 .sec7 .verticalMiddle {
   width: 100%;
 }
-#sec7 .sec7 .verticalMiddle p {
+.sec7 .sec7 .verticalMiddle p {
   font-size: 2.2rem;
 }
-#sec7 .sec7 .verticalMiddle p:after {
+.sec7 .sec7 .verticalMiddle p:after {
   content: "";
   width: 26px;
   height: 2px;
   display: block;
   margin: 24px auto;
 }
-#sec7 .sec7 .verticalMiddle button a {
+.sec7 .sec7 .verticalMiddle button a {
   display: block;
   cursor: pointer;
   width: 180px;
@@ -419,43 +407,41 @@ header nav ul li:last-of-type {
   font-size: 2.2rem;
   line-height: 46px;
 }
-#sec7 .sec7 .l {
+.sec7 .sec7 .l {
   background-color: #e74f4d;
   color: #FFFFFF;
 }
-#sec7 .sec7 .l p:after {
+.sec7 .sec7 .l p:after {
   background-color: #FFFFFF;
 }
-#sec7 .sec7 .l button {
+.sec7 .sec7 .l button {
   border: 1px solid #FFFFFF;
 }
-#sec7 .sec7 .l button a:link,
-#sec7 .sec7 .l button a:visited {
+.sec7 .sec7 .l button a:link {
   background-color: #e74f4d;
   color: #FFFFFF;
 }
-#sec7 .sec7 .l button a:hover {
+.sec7 .sec7 .l button a:hover {
   background-color: #FFFFFF;
   color: #e74f4d;
   -webkit-transition: all 0.3s;
   -o-transition: all 0.3s;
   transition: all 0.3s;
 }
-#sec7 .sec7 .r {
+.sec7 .sec7 .r {
   color: #888888;
 }
-#sec7 .sec7 .r p:after {
+.sec7 .sec7 .r p:after {
   background-color: #888888;
 }
-#sec7 .sec7 .r button {
+.sec7 .sec7 .r button {
   border: 1px solid #e74f4d;
 }
-#sec7 .sec7 .r button a:link,
-#sec7 .sec7 .r button a:visited {
+.sec7 .sec7 .r button a:link {
   background-color: #FFFFFF;
   color: #e74f4d;
 }
-#sec7 .sec7 .r button a:hover {
+.sec7 .sec7 .r button a:hover {
   background-color: #e74f4d;
   color: #FFFFFF;
   border-color: #e74f4d;
@@ -463,23 +449,22 @@ header nav ul li:last-of-type {
   -o-transition: all 0.3s;
   transition: all 0.3s;
 }
-#sec7 .rightest {
+.sec7 .rightest {
   width: 34%;
   float: left;
   height: 500px;
   background: url(img/bg3.jpg) no-repeat center;
   background-size: cover;
 }
-#sec8 {
-  text-align: center;
+.sec8 {
   overflow: hidden;
   padding: 100px 0;
 }
-#sec8 > p:first-of-type {
+.sec8 > p:first-of-type {
   font-size: 3rem;
   color: #333333;
 }
-#sec8 > p:first-of-type:after {
+.sec8 > p:first-of-type:after {
   content: "";
   width: 30px;
   height: 3px;
@@ -487,35 +472,35 @@ header nav ul li:last-of-type {
   display: block;
   margin: 10px auto 20px auto;
 }
-#sec8 > p:last-of-type {
+.sec8 > p:last-of-type {
   color: #aaa;
   font-size: 1.6rem;
   margin: 0 0 100px 0;
 }
-#sec8 #sec8Left {
+.sec8 .sec8Left {
   width: 33%;
   height: 400px;
   float: left;
 }
-#sec8 #sec8Left p {
+.sec8 .sec8Left p {
   text-align: left;
   margin: 10px 100px 0 16%;
   color: #aaa;
   font-size: 1.6rem;
 }
-#sec8 #sec8Left .title {
+.sec8 .sec8Left .title {
   font-size: 2rem;
   color: #333333;
   margin-bottom: 20px;
 }
-#sec8 #sec8Left .link {
+.sec8 .sec8Left .link {
   text-align: right;
   font-size: 1.2rem;
 }
-#sec8 #sec8Left .link a {
+.sec8 .sec8Left .link a {
   position: relative;
 }
-#sec8 #sec8Left .link a:before {
+.sec8 .sec8Left .link a:before {
   content: "";
   display: inline-block;
   width: 8px;
@@ -527,17 +512,16 @@ header nav ul li:last-of-type {
   left: -12px;
   top: 2px;
 }
-#sec8 #sec8Left .link a:link,
-#sec8 #sec8Left .link a:visited {
+.sec8 .sec8Left .link a:link {
   color: #aaa;
 }
-#sec8 table {
+.sec8 table {
   table-layout: fixed;
   width: 67%;
   float: left;
   border-spacing: 0 20px;
 }
-#sec8 table input {
+.sec8 table input {
   background-color: #ededed;
   border: none;
   width: 100%;
@@ -545,65 +529,64 @@ header nav ul li:last-of-type {
   font-size: 3rem;
   line-height: 3rem;
 }
-#sec8 table tr {
+.sec8 table tr {
   width: 100%;
   background-color: #ededed;
   height: 60px;
 }
-#sec8 table tr td:first-of-type {
+.sec8 table tr td:first-of-type {
   width: 6%;
 }
-#sec8 table tr td:nth-of-type(2) {
+.sec8 table tr td:nth-of-type(2) {
   width: 30%;
 }
-#sec8 table tr td:nth-of-type(3) {
+.sec8 table tr td:nth-of-type(3) {
   width: 3%;
   background-color: #FFFFFF;
 }
-#sec8 table tr td:nth-of-type(4) {
+.sec8 table tr td:nth-of-type(4) {
   width: 6%;
 }
-#sec8 table tr td:nth-of-type(5) {
+.sec8 table tr td:nth-of-type(5) {
   width: 30%;
 }
-#sec8 table tr td:nth-of-type(6) {
+.sec8 table tr td:nth-of-type(6) {
   background-color: #FFFFFF;
 }
-#sec8 table tr textarea {
+.sec8 table tr textarea {
   width: 100%;
   border: none;
   height: 140px;
   background-color: #ededed;
   padding: 10px;
 }
-#sec8 table tr .inp {
+.sec8 table tr .inp {
   font-size: 2rem;
   line-height: 2rem;
   color: #231815;
   cursor: pointer;
 }
-#sec9 {
-  text-align: center;
+.sec9 {
   height: 360px;
   background-color: #32353E;
   padding: 60px;
 }
-#sec9 p {
+.sec9 p {
   color: #FFFFFF;
   margin: 16px auto;
 }
-#sec9 p:first-of-type {
+.sec9 p:first-of-type {
   font-size: 2.4rem;
 }
-#sec9 p:last-of-type {
+.sec9 p:last-of-type {
   font-size: 1.4rem;
 }
-#sec9 #submit {
+.sec9 .submit {
   margin: 40px auto;
   width: 600px;
   overflow: hidden;
 }
-#sec9 #submit input {
+.sec9 .submit input {
   float: left;
   padding: 0 10px;
   width: 500px;
@@ -614,22 +597,20 @@ header nav ul li:last-of-type {
   border: none;
   margin: 0;
 }
-#sec9 #submit button {
+.sec9 .submit button {
   float: left;
   width: 100px;
   height: 40px;
   border: none;
   background-color: #767777;
   color: #FFFFFF;
-  font-family: "Microsoft YaHei", Arial, sans-serif;
-  cursor: pointer;
 }
-#sec9 #icons {
+.sec9 .sec9icons {
   margin: 24px auto;
   font-size: 3rem;
   height: 30px;
 }
-#sec9 #icons a {
+.sec9 .sec9icons a {
   color: #FFFFFF;
   display: inline-block;
   margin: 0 10px;
@@ -642,6 +623,7 @@ footer {
 footer span,
 footer a {
   display: inline-block;
+  float: left;
   line-height: 50px;
   margin: 0 100px;
 }
