@@ -71,7 +71,8 @@ header nav ul li {
 header nav ul li a {
   display: block;
 }
-header nav ul li a:link {
+header nav ul li a:link,
+header nav ul li a:visited {
   color: #32353E;
 }
 header nav ul li a:hover {
@@ -335,7 +336,8 @@ header nav ul li:last-of-type {
   width: 120px;
   height: 40px;
 }
-.sec6 .sec6Right .verticalMiddle button a:link {
+.sec6 .sec6Right .verticalMiddle button a:link,
+.sec6 .sec6Right .verticalMiddle button a:visited {
   color: #e74f4d;
 }
 .sec6 .sec6Right .verticalMiddle button a:hover {
@@ -417,7 +419,8 @@ header nav ul li:last-of-type {
 .sec7 .sec7 .l button {
   border: 1px solid #FFFFFF;
 }
-.sec7 .sec7 .l button a:link {
+.sec7 .sec7 .l button a:link,
+.sec7 .sec7 .l button a:visited {
   background-color: #e74f4d;
   color: #FFFFFF;
 }
@@ -437,7 +440,8 @@ header nav ul li:last-of-type {
 .sec7 .sec7 .r button {
   border: 1px solid #e74f4d;
 }
-.sec7 .sec7 .r button a:link {
+.sec7 .sec7 .r button a:link,
+.sec7 .sec7 .r button a:visited {
   background-color: #FFFFFF;
   color: #e74f4d;
 }
@@ -512,7 +516,8 @@ header nav ul li:last-of-type {
   left: -12px;
   top: 2px;
 }
-.sec8 .sec8Left .link a:link {
+.sec8 .sec8Left .link a:link,
+.sec8 .sec8Left .link a:visited {
   color: #aaa;
 }
 .sec8 table {
