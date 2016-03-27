@@ -1,0 +1,16 @@
+#display > div {
+    height: 60px;
+    background-color: red;
+    color: white;
+    font-family: 'Microsoft YaHei UI', sans-serif;
+    min-width: 60px;
+    float: left;
+    font-size: 30px;
+    line-height: 60px;
+    text-align: center;
+    margin:20px;
+    padding:0 20px;
+}
+span{
+    color:black;
+}
