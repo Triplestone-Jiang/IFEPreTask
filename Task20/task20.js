@@ -4,7 +4,7 @@
 (function () {
     var bts = document.getElementsByClassName("buttons");
     var display = document.getElementById("display");
-    var splitReg = /[-^!@#$%&*(),.、。，\s/\\ ]+/;
+    var splitReg = /[,.、。，\s ]+/;
     var data = [];
     var dataAll = [];
     var reg = new RegExp();
