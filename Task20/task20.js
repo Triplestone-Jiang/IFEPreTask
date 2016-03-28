@@ -38,18 +38,17 @@
         var searchInput = document.getElementById("searchInput").value;
         var searchOk = false;
         dataAll.forEach(function (item, index) {
-            try {
-                var currentWord = display.getElementsByTagName("div")[index].innerText;
-                display.getElementsByTagName("div")[index].innerHTML = currentWord;
+                var selectedIterm = display.getElementsByTagName("div")[index];
+                selectedIterm.style.backgroundColor = "red";
+                var currentWord = selectedIterm.innerText;
+                selectedIterm.innerHTML = currentWord;
                 if (item.indexOf(searchInput) > -1) {
                     searchOk = true;
                     reg = eval("/" + searchInput + "/g");
                     currentWord = currentWord.replace(reg, "<span>" + searchInput + "</span>");
-                    display.getElementsByTagName("div")[index].innerHTML = currentWord;
+                    selectedIterm.innerHTML = currentWord;
+                    selectedIterm.style.backgroundColor = "gold";
                 }
-            } catch (ex) {
-            }
-
         });
         if (!searchOk) {
             alert("404 Not Found");
@@ -93,13 +92,22 @@
     }
 
     function divRemove(event) {
-        event.target.parentNode.removeChild(event.target);
+        var parent=event.target.parentNode;
+        
+        var nodeAll = parent.getElementsByTagName("div");
+        console.log(nodeAll);
+        for (var i = 0; i < nodeAll.length; i++) {
+            if (nodeAll.item(i) === event.target) {
+                dataAll.splice(i, 1);
+            }
+        }
+        parent.removeChild(event.target);
+
     }
 
     function delegateEvent(delegateElement, targetElement, eventName, handler) {
         delegateElement.addEventListener(eventName, function (event) {
             if (event.target.nodeName.toLowerCase() === targetElement.toLowerCase() && event.target.id !== "display") {
-                console.log(event);
                 return handler(event);
             }
         }, false);

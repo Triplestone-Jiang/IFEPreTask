@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -7,15 +7,19 @@
 </head>
 
 <body>
-    <textarea id="textArea">please input here</textarea>
-
-    <button id="leftIn" class="buttons">leftIn</button>
-    <button id="rightIn" class="buttons">rightIn</button>
-    <button id="leftOut" class="buttons">leftOut</button>
-    <button id="rightOut" class="buttons">rightOut</button>
-    <label for="searchInput">Please Input Number:</label>
-    <input type="text" id="searchInput">
-    <button id="searchBt">search</button>
+    <textarea id="textArea" placeholder="请在这里输入数据......可以输入数字、中文、英文等，可以通过用回车，逗号（全角半角均可），顿号，空格（全角半角、Tab等均可）等符号作为不同内容的间隔"></textarea>
+    <div class="btns">
+        <button id="leftIn" class="buttons">leftIn</button>
+        <button id="rightIn" class="buttons">rightIn</button>
+        <button id="leftOut" class="buttons">leftOut</button>
+        <button id="rightOut" class="buttons">rightOut</button>
+    </div>
+    <div class="search">
+        <label for="searchInput">Please Input Search String here:</label>
+        <input type="text" id="searchInput">
+        <button id="searchBt">search</button>
+    </div>
+    
     <div id="display"></div>
     <script src="task20.js"></script>
 

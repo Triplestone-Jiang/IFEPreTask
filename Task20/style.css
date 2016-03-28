@@ -1,3 +1,4 @@
+
 #display > div {
     height: 60px;
     background-color: red;
@@ -5,12 +6,42 @@
     font-family: 'Microsoft YaHei UI', sans-serif;
     min-width: 60px;
     float: left;
-    font-size: 30px;
+    font-size: 20px;
     line-height: 60px;
     text-align: center;
     margin:20px;
-    padding:0 20px;
+    padding:0 30px;
+    cursor:pointer;
 }
 span{
     color:black;
+}
+textarea{
+    width:620px;
+    height:160px;
+    display:block;
+    margin:20px auto;
+}
+.btns{
+    width:640px;
+    margin:40px auto;
+}
+.btns>button,.search>button{
+    font-family: 'Microsoft YaHei UI', sans-serif;
+    width:120px;
+    height:30px;
+    line-height:28px;
+    font-size:16px;
+    margin:0 10px;
+    padding:0;
+
+}
+.search{
+    width:600px;
+    margin:20px auto;
+}
+label{
+    font-family:'Microsoft YaHei UI', sans-serif;
+    font-size:16px;
+    line-height:30px;
 }
