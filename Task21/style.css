@@ -1,0 +1,50 @@
+* {
+    font-family: 'Microsoft YaHei UI', Arial, sans-serif;
+
+}
+
+.tag, .hobby {
+    width: 800px;
+    overflow: hidden;
+    margin: 40px auto;
+    min-height: 120px;
+}
+
+.tag lable, .tag input {
+    font-size: 16px;
+    line-height: 14px;
+    width: 300px;
+    position: relative;
+    left: 20%;
+}
+
+.tagDisplay div, .hobbyDisplay div {
+    text-align: center;
+    min-width: 80px;
+    height: 40px;
+    padding: 10px;
+    line-height: 40px;
+    float: left;
+    margin: 10px;
+    background-color: RGB(190, 146, 246);
+    color: white;
+    cursor: pointer;
+}
+
+.hobbyDisplay div {
+    background-color: red;
+    cursor: pointer;
+}
+
+.hobby textarea {
+    width: 200px;
+    height: 80px;
+    display: block;
+    margin: 20px auto;
+}
+
+.hobby button {
+    width: 200px;
+    display: block;
+    margin: 20px auto;
+}
