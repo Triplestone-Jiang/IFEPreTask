@@ -120,9 +120,10 @@
     }
 
     //事件代理函数
-    function delegateEvent(delegateElement, targetElement, eventName, handler) {
+    function delegateEvent(delegateElement, element, eventName, handler) {
         delegateElement.addEventListener(eventName, function (event) {
-            if (event.target.nodeName.toLowerCase() === targetElement.toLowerCase() && event.target.id !== "display") {
+            //点击div元素，其父元素为div#display 点击div元素的子节点(文本节点),其父元素为div 点击div#display,其父元素为body
+            if (event.target.parentNode.nodeName.toLowerCase() === element.toLowerCase() ) {
                 return handler(event);
             }
         }, false);
