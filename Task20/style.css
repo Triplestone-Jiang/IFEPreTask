@@ -22,11 +22,11 @@ textarea{
     display:block;
     margin:20px auto;
 }
-.btns{
+.bts{
     width:640px;
     margin:40px auto;
 }
-.btns>button,.search>button{
+.bts>button,.search>button{
     font-family: 'Microsoft YaHei UI', sans-serif;
     width:120px;
     height:30px;

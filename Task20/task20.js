@@ -1,14 +1,13 @@
-/**
- * Created by ycaru on 2016/3/27.
- */
 (function () {
     var bts = document.getElementsByClassName("buttons");
     var display = document.getElementById("display");
     var splitReg = /[,.、。，\s ]+/;
+    //data定义每次输入的字符串所返回的数组，dataAll定义所有输入字符串所返回的数组
     var data = [];
     var dataAll = [];
     var reg = new RegExp();
     var searchBt = document.getElementById("searchBt");
+    //给四个button绑定事件，使用匿名函数消除闭包产生的影响
     for (var i = 0; i < 4; i++) {
         bts[i] = (function (turns) {
             bts[turns].onclick = function () {
@@ -24,37 +23,45 @@
                         divIn(null);
                         break;
                     case "leftOut":
-                        divOut(firstChild);
+                        divOut(firstChild, "left");
                         break;
                     case "rightOut":
-                        divOut(lastChild);
+                        divOut(lastChild, "right");
                         break;
                 }
             }
         })(i);
     }
+    //将在div上的事件代理到display上
     delegateEvent(display, "div", "click", divRemove);
+    //button查找 绑定事件
     searchBt.onclick = function () {
         var searchInput = document.getElementById("searchInput").value;
         var searchOk = false;
+        //遍历数组
         dataAll.forEach(function (item, index) {
-                var selectedIterm = display.getElementsByTagName("div")[index];
-                selectedIterm.style.backgroundColor = "red";
-                var currentWord = selectedIterm.innerText;
-                selectedIterm.innerHTML = currentWord;
-                if (item.indexOf(searchInput) > -1) {
-                    searchOk = true;
-                    reg = eval("/" + searchInput + "/g");
-                    currentWord = currentWord.replace(reg, "<span>" + searchInput + "</span>");
-                    selectedIterm.innerHTML = currentWord;
-                    selectedIterm.style.backgroundColor = "gold";
-                }
+            var selectedItem = display.getElementsByTagName("div")[index];
+            //初始背景，消除上一次搜索改变的背景色
+            selectedItem.style.backgroundColor = "red";
+            //将当前的div的内部字符串赋值到div的innerHTML，消除上一次搜索添加的<span>标签
+            var currentWord = selectedItem.innerText;
+            selectedItem.innerHTML = currentWord;
+            //是否匹配输入查找字符串
+            if (item.indexOf(searchInput) > -1) {
+                searchOk = true;
+                //将输入的查找字符串转化为正则对象，添加g flag以搜索所有匹配字符串
+                reg = eval("/" + searchInput + "/g");
+                //将匹配字符串加入<span>标签，用css样式渲染
+                currentWord = currentWord.replace(reg, "<span>" + searchInput + "</span>");
+                selectedItem.innerHTML = currentWord;
+                selectedItem.style.backgroundColor = "gold";
+            }
         });
         if (!searchOk) {
             alert("404 Not Found");
         }
-
     };
+    //处理textArea输入的字符串，转化为data数组，并添加到总数组dataAll中
     function getData(direction) {
         var inputs = document.getElementById("textArea").value.trim();
         if (inputs === "") {
@@ -69,9 +76,9 @@
         } else if (direction === "right") {
             dataAll = dataAll.concat(inputsArray);
         }
-
     }
 
+    //渲染In
     function divIn(direction) {
         data.forEach(function (item) {
             if (item) {
@@ -83,28 +90,36 @@
         });
     }
 
-    function divOut(direction) {
+    //渲染Out
+    function divOut(direction, whichItem) {
         if (direction) {
             display.removeChild(direction);
         } else {
             alert("No Numbers Left");
         }
+        //从dataAll中删除
+        if (whichItem === "left") {
+            dataAll.splice(0, 1);
+        } else if (whichItem === "right") {
+            dataAll.splice(dataAll.length - 1, 1);
+        }
     }
 
+    //点击div删除该div
     function divRemove(event) {
-        var parent=event.target.parentNode;
-        
+        var parent = event.target.parentNode;
         var nodeAll = parent.getElementsByTagName("div");
-        console.log(nodeAll);
+        //从dataAll中删除对应点击项
         for (var i = 0; i < nodeAll.length; i++) {
             if (nodeAll.item(i) === event.target) {
                 dataAll.splice(i, 1);
             }
         }
+        //渲染页面删除对应点击项
         parent.removeChild(event.target);
-
     }
 
+    //事件代理函数
     function delegateEvent(delegateElement, targetElement, eventName, handler) {
         delegateElement.addEventListener(eventName, function (event) {
             if (event.target.nodeName.toLowerCase() === targetElement.toLowerCase() && event.target.id !== "display") {
