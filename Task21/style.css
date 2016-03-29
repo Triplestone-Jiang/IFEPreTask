@@ -43,7 +43,7 @@
     transition: all 0.4s;
 }
 .hobbyDisplay div {
-    background-color: magenta;
+    background-color: darkgoldenrod;
     cursor: default;
 }
 

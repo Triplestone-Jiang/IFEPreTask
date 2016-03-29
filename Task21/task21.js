@@ -4,6 +4,7 @@ window.onload = function () {
 
     function getData(inputItem, displayItem) {
         var input = inputItem.value.trim().split(/[,.、。，\s ]+/);
+        inputItem.value="";
         //输入数组内部去重
         input = unique(input);
         if (displayItem.hasChildNodes()) {
