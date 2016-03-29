@@ -7,18 +7,24 @@ window.onload = function () {
         if (displayItem.hasChildNodes()) {
             var displayItemChild = displayItem.childNodes;
             var arrayOfDisplayItemChild = [];
+            //将展示的元素的内部文本保存成数组，为了下一步查重
             for (var i = 0; i < displayItemChild.length; i++) {
                 arrayOfDisplayItemChild[i] = displayItemChild[i].innerText;
             }
+            //输入的数据与当前已展示的数据查重
             input = input.filter(function (item1) {
                 return (arrayOfDisplayItemChild.every(function (item2) {
                     return (item1 !== item2);
                 }));
             });
         }
-        if (input.length && input.length < 11) {
+        //过滤空数组
+        input = input.filter(function (item) {
+            return (item !== "");
+        });
+        if (input && input.length < 11) {
             return input;
-        } else if (input.length && input.length > 10) {
+        } else if (input && input.length > 10) {
             input.splice(0, input.length - 10);
             return input;
         } else {
@@ -26,20 +32,24 @@ window.onload = function () {
         }
     }
 
+    //渲染
     function render(data, displayItem) {
+        //总数据大于10时，处理因新输入而需要去除的旧数据
         var redundant = data.length + displayItem.childNodes.length - 10;
         if (redundant > 0) {
             for (var i = 0; i < redundant && i < 10; i++) {
                 displayItem.removeChild(displayItem.lastChild);
             }
         }
-        for (j = 0; j < data.length; j++) {
+        //根据修改后的输入数据插入新元素
+        for (var j = 0; j < data.length; j++) {
             var newDiv = document.createElement("div");
             newDiv.appendChild(document.createTextNode(data[j]));
             displayItem.insertBefore(newDiv, displayItem.firstChild);
         }
     }
 
+    //事件绑定函数
     function addEvent(element, eventType, handler) {
         if (addEventListener) {
             element.addEventListener(eventType, handler, false);
@@ -70,15 +80,20 @@ window.onload = function () {
     }
 
     addEvent(document.getElementById("hobbyButton"), "click", function () {
-        var hobbydisplay = document.getElementById("hobbyDisplay");
-        var result = getData(document.getElementById("hobbyInput"), hobbydisplay);
+        var hobbyDisplay = document.getElementById("hobbyDisplay");
+        var result = getData(document.getElementById("hobbyInput"), hobbyDisplay);
         if (result) {
-            render(result, hobbydisplay);
+            render(result, hobbyDisplay);
         }
     });
-    addEvent(document.getElementById("tagInput"), "keydown", function (event) {
+    addEvent(document.getElementById("tagInput"), "keyup", function (event) {
+        //增加对中文逗号的识别
+        var comma = /^.+，$/;
+        if (document.getElementById("tagInput").value.search(comma) + 1) {
+            var commaTrue = true;
+        }
         var evt = event || window.event;
-        if (evt.keyCode === 13 || evt.keyCode === 32 || evt.keyCode === 188) {
+        if (evt.keyCode === 13 || evt.keyCode === 32 || evt.keyCode === 188 || commaTrue) {
             var result = getData(document.getElementById("tagInput"), tagDisplay);
             if (result) {
                 render(result, tagDisplay);
@@ -86,7 +101,7 @@ window.onload = function () {
         }
     });
     addEvent(tagDisplay, "mouseover", function (event) {
-        var originalText = mouseOver(event);
+        mouseOver(event);
     });
     addEvent(tagDisplay, "mouseout", function (event) {
         mouseOut(event);
