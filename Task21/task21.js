@@ -4,6 +4,8 @@ window.onload = function () {
 
     function getData(inputItem, displayItem) {
         var input = inputItem.value.trim().split(/[,.、。，\s ]+/);
+        //输入数组内部去重
+        input = unique(input);
         if (displayItem.hasChildNodes()) {
             var displayItemChild = displayItem.childNodes;
             var arrayOfDisplayItemChild = [];
@@ -29,6 +31,17 @@ window.onload = function () {
             return input;
         } else {
             return false;
+        }
+        function unique(array) {
+            var uniqueData = [];
+            var json={};
+            for (var i = 0; i < array.length; i++) {
+                if (!json[array[i]]) {
+                    uniqueData.push(array[i]);
+                    json[array[i]] = 1;
+                }
+            }
+            return uniqueData;
         }
     }
 
