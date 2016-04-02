@@ -4,36 +4,33 @@
 (function () {
     var input = document.getElementById("input");
     var bts = document.getElementsByClassName("buttons");
-    var timeInterval=document.getElementById("timeInterval");
+    var timeInterval = document.getElementById("timeInterval");
     var dataArray = [];
     var display = document.getElementById("display");
     var dataReg = /^\d+$/;
-    for (var i = 0; i < 6; i++) {
-        (function (turn) {
-            bts[turn].onclick = function () {
-                switch (bts.item(turn).id) {
-                    case "leftIn":
-                        verifyInput(input, "left");
-                        break;
-                    case "rightIn":
-                        verifyInput(input, "right");
-                        break;
-                    case "leftOut":
-                        divOut("left");
-                        break;
-                    case "rightOut":
-                        divOut("right");
-                        break;
-                    case "bubblingSort":
-                        dataArray = bubblingSort(dataArray);
-                        break;
-                    case "random50":
-                        initial();
-                        break;
-                }
-            }
-        })(i);
-    }
+    $ = function (selector) {
+        return document.querySelector(selector);
+    };
+    $("#leftIn").onclick = function () {
+        verifyInput(input, "left");
+    };
+    $("#rightIn").onclick = function () {
+        verifyInput(input, "right");
+    };
+    $("#leftOut").onclick = function () {
+        divOut(input, "left");
+    };
+    $("#rightOut").onclick = function () {
+        divOut(input, "right");
+    };
+    $("#bubblingSort").onclick = function () {
+        dataArray = bubblingSort(dataArray);
+    };
+    $("#quickSort").onclick = function () {
+        dataArray = quickSort(dataArray);
+        renderAll(dataArray);
+    };
+    $("#random50").onclick = initial;
     delegateEvent(display, "div", "click", clickToRemove);
     initial();
     function verifyInput(inputValue, direction) {
@@ -45,7 +42,7 @@
         if (dataReg.test(data)) {
             data = parseInt(data, 10);
             if (data < 10 || data > 100) {
-                alert("The input value should between 10 and 100");
+                alert("The input value should be between 10 and 100");
                 return;
             }
         } else {
@@ -113,7 +110,7 @@
     function randomData(amount) {
         var result = [];
         for (var i = 0; i < amount; i++) {
-            result.push((Math.floor(91 * Math.random() + 10)).toString());
+            result.push((Math.floor(91 * Math.random() + 10)));
         }
         return result;
     }
@@ -123,27 +120,63 @@
     }
 
     function bubblingSort(array) {
-        var time_Interval=timeInterval.value.trim();
-        if(time_Interval.search(dataReg)+1===0){
+        var time_Interval = timeInterval.value.trim();
+        if (time_Interval.search(dataReg) + 1 === 0) {
             alert("Please Input Valid Time Interval");
             return array;
-        }else {
-            time_Interval=+time_Interval;
+        } else {
+            time_Interval = +time_Interval;
         }
+
         for (var i = 0; i < array.length; i++) {
             (function (i) {
                 setTimeout(function () {
                     for (var j = array.length - 1; j > i; j--) {
-                        if (+array[j - 1] > +array[j]) {
+                        if (array[j - 1] > array[j]) {
                             var temp = array[j];
                             array[j] = array[j - 1];
                             array[j - 1] = temp;
                         }
                     }
                     renderAll(array);
+                    display.childNodes.item(i).style.backgroundColor = "chocolate";
+                    display.childNodes.item(i).style.color = "#FFFFFF";
                 }, time_Interval * i)
             })(i);
         }
+        return array;
+    }
+
+    function quickSort(array) {
+        var lastEnd = 0;
+
+        function sort(firstIndex, arrayLength) {
+            var i = firstIndex;
+            var j = arrayLength - 1;
+            var flag = array[i];
+            if ((arrayLength - i) > 1) {
+                while (i < j) {
+                    for (; i < j; j--) {
+                        if (array[j] < flag) {
+                            array[i++] = array[j];
+                            break;
+                        }
+                    }
+                    for (; i < j; i++) {
+                        if (array[i] > flag) {
+                            array[j--] = array[i];
+                            break;
+                        }
+                    }
+                }
+                array[i] = flag;
+                sort(lastEnd, i);
+                lastEnd = i + 1;
+                sort(i + 1, arrayLength);
+            }
+        }
+
+        sort(0, array.length);
         return array;
     }
 
@@ -152,7 +185,7 @@
         var fragment = document.createDocumentFragment();
         for (var i = 0; i < array.length; i++) {
             var newDiv = document.createElement("div");
-            newDiv.appendChild(document.createTextNode(array[i]));
+            newDiv.appendChild(document.createTextNode(array[i].toString()));
             renderHeight(newDiv, array[i] * 4);
             fragment.appendChild(newDiv);
         }
