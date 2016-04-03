@@ -10,6 +10,7 @@
     border:1px solid chocolate;
     position: relative;
     width:20px;
+    transition: all 500ms;
 }
 #display{
     width:1340px;
