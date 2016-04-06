@@ -8,7 +8,7 @@
     var display = document.getElementById("display");
     var dataReg = /^\d+$/;
     var inAnimation = false;
-    var time_Interval = 300;
+    var time_Interval = 100;
     var $ = function (selector) {
         return document.querySelector(selector);
     };
@@ -18,41 +18,67 @@
     var animateQueue = delay(function () {
     }, 0);
     $("#leftIn").onclick = function () {
-        if (inAnimation)return alert("In Animation");
-        verifyInput(input, "left");
+        if (!checkAnimation()) {
+            getData(input, "left");
+            renderAll(dataArray);
+        }
     };
     $("#rightIn").onclick = function () {
-        if (inAnimation)return alert("In Animation");
-        verifyInput(input, "right");
+        if (!checkAnimation()) {
+            getData(input, "right");
+            renderAll(dataArray);
+        }
     };
     $("#leftOut").onclick = function () {
-        if (inAnimation)return alert("In Animation");
-        divOut(input, "left");
+        if (!checkAnimation()) {
+            divOut(input, "left");
+        }
     };
     $("#rightOut").onclick = function () {
-        if (inAnimation)return alert("In Animation");
-        divOut(input, "right");
-    };
-    $("#bubblingSort").onclick = function () {
-        if (inAnimation)return alert("In Animation");
-        dataArray = bubblingSort(dataArray);
-    };
-    $("#quickSort").onclick = function () {
-        if (inAnimation)return alert("In Animation");
-        getTimeInterval();
-        inAnimation = true;
-        dataArray = sort(0, dataArray.length - 1, dataArray);
-        animateQueue.delay(function () {
-            inAnimation = false;
-        })
+        if (!checkAnimation()) {
+            divOut(input, "right");
+        }
     };
     $("#random50").onclick = function () {
-        if (inAnimation)return alert("In Animation");
-        initial();
+        if (!checkAnimation()) {
+            dataArray = initial(50);
+            renderAll(dataArray);
+        }
+    };
+    $("#bubblingSort").onclick = function () {
+        if (!checkAnimation()) {
+            getTimeInterval();
+            dataArray = bubblingSort(dataArray);
+        }
+    };
+    $("#quickSort").onclick = function () {
+        if (!checkAnimation()) {
+            getTimeInterval();
+            dataArray = sort(0, dataArray.length - 1, dataArray);
+        }
+    };
+    $("#cancelAnimation").onclick = function () {
+        if (inAnimation) {
+            animateQueue.cancel();
+            animateQueue = delay(function () {
+            }, 0);
+            inAnimation = false;
+            dataArray=initial(50);
+        }
     };
     delegateEvent(display, "div", "click", clickToRemove);
-    initial();
-    function verifyInput(inputValue, direction) {
+    dataArray = initial(50);
+    renderAll(dataArray);
+    function initial(amount) {
+        var result = [];
+        for (var i = 0; i < amount; i++) {
+            result.push((Math.floor(91 * Math.random() + 10)));
+        }
+        return result;
+
+    }
+
+    function getData(inputValue, direction) {
         if (dataArray.length === 60) {
             alert("The data amount should be no more than 60");
             return;
@@ -68,11 +94,6 @@
             alert("Please input the valid number");
             return;
         }
-        divIn(data, direction);
-        getDataArray(data, direction);
-    }
-
-    function getDataArray(data, direction) {
         if (direction === "left") {
             dataArray.unshift(data);
         } else if (direction === "right") {
@@ -80,17 +101,10 @@
         }
     }
 
-    function divIn(data, direction) {
-        var text = data.toString();
-        var textNode = document.createTextNode(text);
-        var newDiv = document.createElement("div");
-        newDiv.appendChild(textNode);
-        if (direction === "left") {
-            display.insertBefore(newDiv, display.firstChild);
-        } else if (direction === "right") {
-            display.insertBefore(newDiv, null);
-        }
-        renderHeight(newDiv, data * 4);
+    function renderAll(array) {
+        display.innerHTML = array.map(function (item) {
+            return "<div style='height:" + item * 4 + "px;top:" + (100 - item * 4) + "px;line-height:" + item * 4 + "px'>" + item + "</div>";
+        }).join("");
     }
 
     function clickToRemove(event) {
@@ -113,81 +127,70 @@
         }
     }
 
-    function delegateEvent(delegateElement, targetElement, eventName, handler) {
-        delegateElement.addEventListener(eventName, function (event) {
-            if (event.target.nodeName.toLowerCase() === targetElement.toLowerCase()) {
-                if (inAnimation)return alert("In Animation");
-                return handler(event);
-            }
-        }, false);
-    }
-
-    function initial() {
-        dataArray = randomData(50);
-        renderAll(dataArray);
-    }
-
-    function randomData(amount) {
-        var result = [];
-        for (var i = 0; i < amount; i++) {
-            result.push((Math.floor(91 * Math.random() + 10)));
-        }
-        return result;
-    }
-
-    function renderHeight(item, value) {
-        item.setAttribute("style", "height:" + value + "px;top:" + (100 - value) + "px;line-height:" + value + "px");
-    }
-
     function getTimeInterval() {
         time_Interval = timeInterval.value.trim();
         if (time_Interval.search(dataReg) + 1 === 0) {
             alert("Please Input Valid Time Interval");
+            time_Interval = 100;
         } else {
             time_Interval = +time_Interval;
         }
     }
 
     function bubblingSort(array) {
-        getTimeInterval();
+        inAnimation = true;
         for (var i = 0; i < array.length; i++) {
-            (function (i) {
-                setTimeout(function () {
-                    for (var j = array.length - 1; j > i; j--) {
-                        if (array[j - 1] > array[j]) {
-                            var temp = array[j];
-                            array[j] = array[j - 1];
-                            array[j - 1] = temp;
-                        }
-                    }
-                    renderAll(array);
-                    display.childNodes.item(i).style.backgroundColor = "chocolate";
-                    display.childNodes.item(i).style.color = "#FFFFFF";
-                }, time_Interval * i)
-            })(i);
+            for (var j = array.length; j > i; j--) {
+                if (array[j - 1] > array[j]) {
+                    var temp = array[j];
+                    array[j] = array[j - 1];
+                    array[j - 1] = temp;
+                    console.log(2);
+                    bubblingRender(j, array[j - 1] * 4, array[j] * 4);
+                }
+            }
         }
+        animateQueue.delay(function () {
+            inAnimation = false;
+        });
         return array;
+    }
+
+    function bubblingRender(index, value1, value2) {
+        getTimeInterval();
+        var displayItems = $$("#display div");
+        animateQueue.delay(function () {
+
+            displayItems[index - 1].setAttribute("style", "background-color:chocolate;color:white;height:" + value1 + "px;top:" + (100 - value1) + "px;line-height:" + value1 + "px");
+            displayItems[index - 1].innerText = (value1 / 4).toString();
+            displayItems[index].setAttribute("style", "height:" + value2 + "px;top:" + (100 - value2) + "px;line-height:" + value2 + "px");
+            displayItems[index].innerText = (value2 / 4).toString();
+        }, 0);
+        animateQueue.delay(function () {
+            displayItems[index - 1].style.backgroundColor = "white";
+            displayItems[index - 1].style.color = "chocolate";
+        }, time_Interval);
     }
 
     function sortPartition(left, right, array) {
         var flag = array[left];
         rangeRender(left, right);
         while (left < right) {
-            animateRender(left);
+            quickSortRender(left);
             for (; left < right; right--) {
-                animateRender(right);
+                quickSortRender(right);
                 if (array[right] < flag) {
                     array[left] = array[right];
-                    animateRender(left, array[left]);
+                    quickSortRender(left, array[left]);
                     left++;
                     break;
                 }
             }
             for (; left < right; left++) {
-                animateRender(left);
+                quickSortRender(left);
                 if (array[left] > flag) {
                     array[right] = array[left];
-                    animateRender(right, array[right]);
+                    quickSortRender(right, array[right]);
                     right--;
                     break;
                 }
@@ -195,11 +198,12 @@
         }
         array[left] = flag;
         rangeRender(left, right);
-        animateRender(left, array[left]);
+        quickSortRender(left, array[left]);
         return left;
     }
 
     function sort(left, right, array) {
+        inAnimation = true;
         var index = sortPartition(left, right, array);
         if ((index - left) > 1) {
             sort(left, index, array);
@@ -207,24 +211,28 @@
         if ((right - index) > 1) {
             sort(index + 1, right, array);
         }
+        animateQueue.delay(function () {
+            inAnimation = false;
+        });
         return array;
     }
 
-    function animateRender(index, value) {
+    function quickSortRender(index, value) {
+        var displayItems = $$("#display div");
+        var displayItem = displayItems[index];
         animateQueue.delay(function () {
-            $$("#display div")[index].style.backgroundColor = "chocolate";
-            $$("#display div")[index].style.color = "white";
-
+            displayItem.style.backgroundColor = "chocolate";
+            displayItem.style.color = "white";
         }, 0);
         animateQueue.delay(function () {
             if (value) {
-                $$("#display div")[index].setAttribute("style", "height:" + value * 4 + "px;top:" + (100 - value * 4) + "px;line-height:" + value * 4 + "px");
-                $$("#display div")[index].innerText = value;
+                displayItem.setAttribute("style", "height:" + value * 4 + "px;top:" + (100 - value * 4) + "px;line-height:" + value * 4 + "px");
+                displayItem.innerText = value;
             }
         }, 0);
         animateQueue.delay(function () {
-            $$("#display div")[index].style.backgroundColor = "white";
-            $$("#display div")[index].style.color = "chocolate";
+            displayItem.style.backgroundColor = "white";
+            displayItem.style.color = "chocolate";
         }, time_Interval);
     }
 
@@ -236,16 +244,20 @@
         })
     }
 
-    function renderAll(array) {
-        display.innerHTML = "";
-        var fragment = document.createDocumentFragment();
-        for (var i = 0; i < array.length; i++) {
-            var newDiv = document.createElement("div");
-            newDiv.appendChild(document.createTextNode(array[i].toString()));
-            renderHeight(newDiv, array[i] * 4);
-            fragment.appendChild(newDiv);
+    function checkAnimation() {
+        if (inAnimation) {
+            alert("In Animation");
+            return true;
         }
-        display.appendChild(fragment);
+    }
+
+    function delegateEvent(delegateElement, targetElement, eventName, handler) {
+        delegateElement.addEventListener(eventName, function (event) {
+            if (event.target.nodeName.toLowerCase() === targetElement.toLowerCase()) {
+                if (inAnimation)return alert("In Animation");
+                return handler(event);
+            }
+        }, false);
     }
 
     function delay(fn, t) {
