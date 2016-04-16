@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>task37</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+        button {
+            width: 140px;
+            height: 40px;
+            line-height: 40px;
+            display: block;
+            margin: 20px;
+        }
+    </style>
+    <script src="task37.js"></script>
+</head>
+<body>
+    <button onclick='$$("success").show()'>success message</button>
+    <button onclick='$$("warning").show()'>alert message</button>
+    <button onclick='$$("error").show()'>error message</button>
+    <button onclick='$$("自定义",{
+        infoMessage:"This is custom message",
+        color:"orange",
+        button1:["button1","black",function() {alert("hi")}],
+        button2:["button2","purple",function() {alert("hei")}]
+    }).show()'>自定义
+    </button>
+<div>
+    <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+    <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+    <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+    <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+</div>
+</body>
+</html>
