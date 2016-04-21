@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Task 33</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="container">
+    <div class="left">
+        <table id="box"></table>
+    </div>
+    <div class="right">
+        <div class="button">
+            <button id="turnLeft">turnLeft</button>
+            <button id="turnRight">turnRight</button>
+            <button id="turnBack">turnBack</button>
+            <button id="go">go</button>
+            <button id="travelLeft">travelLeft</button>
+            <button id="travelRight">travelRight</button>
+            <button id="travelUp">travelUp</button>
+            <button id="travelDown">travelDown</button>
+            <button id="moveLeft">moveLeft</button>
+            <button id="moveRight">moveRight</button>
+            <button id="moveUp">moveUp</button>
+            <button id="moveDown">moveDown</button>
+            <button id="execute">execute</button>
+            <button id="refresh">refresh</button>
+            <label for="size">
+                <select id="size" class="select">
+                    <option value="10">10×10</option>
+                    <option value="15" selected="selected">15×15</option>
+                    <option value="20">20×20</option>
+                    <option value="25">25×25</option>
+                </select>
+            </label>
+        </div>
+        <div class="notice">
+            shift+enter执行命令;可用键盘方向键控制
+        </div>
+        <div class="text">
+            <label for="instruction"></label>
+            <div id="indexBox" class="indexBox">
+                <div id="listBox" class="listBox"></div>
+            </div>
+            <textarea id="instruction">mov bot 3
+tun rig
+go 2
+mov lef 4
+mov bot 3
+tra rig 2
+tun lef
+go</textarea>
+        </div>
+    </div>
+</div>
+<script src="cube.js"></script>
+<script src="tableGenerator.js"></script>
+<script src="functions.js"></script>
+<script src="event.js"></script>
+<script src="keyboard.js"></script>
+</body>
+</html>
