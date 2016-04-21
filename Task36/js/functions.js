@@ -77,30 +77,30 @@ function Handler() {
         switch (deg) {
             case 0:
                 if ((cube.y + 1 > amount)) {
-                    console.log("s")
+                    console.log("the wall is out of range");
                 } else {
-                    return [cube.x, cube.y + 1]
+                    return [cube.x, cube.y + 1];
                 }
                 break;
             case 90:
                 if ((cube.x - 1 < 1)) {
-                    console.log("s")
+                    console.log("the wall is out of range");
                 } else {
-                    return [cube.x - 1, cube.y]
+                    return [cube.x - 1, cube.y];
                 }
                 break;
             case 180:
                 if ((cube.y - 1 < 1)) {
-                    console.log("s")
+                    console.log("the wall is out of range");
                 } else {
-                    return [cube.x, cube.y - 1]
+                    return [cube.x, cube.y - 1];
                 }
                 break;
             case 270:
                 if ((cube.x + 1 > amount)) {
-                    console.log("s")
+                    console.log("the wall is out of range");
                 } else {
-                    return [cube.x + 1, cube.y]
+                    return [cube.x + 1, cube.y];
                 }
                 break;
         }
@@ -116,11 +116,13 @@ function Handler() {
         }
     };
     this.build = function () {
-        var position = h.wallPosition(cube.deg);
-        newWall.build(position[0], position[1]);
+        var position = h.wallPosition(h.calDeg());
+        if(position[0]){
+            newWall.build(position[0], position[1]);
+        }
     };
     this.bru = function (color) {
-        var position = h.wallPosition(cube.deg);
+        var position = h.wallPosition(h.calDeg());
         var currentWalls = newWall.getWall();
         if (currentWalls[position[0] + "," + position[1]]) {
             newWall.brushColor(position[0], position[1], color);
