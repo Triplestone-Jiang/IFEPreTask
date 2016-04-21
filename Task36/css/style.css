@@ -1,0 +1,112 @@
+* {
+    padding: 0;
+    margin: 0;
+}
+
+button, .select {
+    height: 30px;
+    line-height: 30px;
+    background-color: white;
+    border: 1px solid chocolate;
+    width: 100px;
+    color: chocolate;
+    transition: all 0.4s;
+    cursor: pointer;
+    margin: 2px 0;
+    outline: none;
+    box-sizing: border-box;
+}
+
+button:hover {
+    background-color: chocolate;
+    color: white;
+}
+
+.container {
+    position: relative;
+    width: 1000px;
+    margin: 40px auto 0 auto;
+}
+
+.left {
+    width: 660px;
+}
+
+.right {
+    position: absolute;
+    left: 660px;
+    width: 340px;
+    top: 0;
+    bottom: 0;
+}
+
+.button {
+    width: 356px;
+    margin: 10px auto 0 auto;
+}
+
+.notice {
+    font-family: 'Microsoft YaHei', Arial, sans-serif;
+    color: chocolate;
+    text-align: center;
+    height: 30px;
+    line-height: 30px;
+}
+
+.text {
+    position: absolute;
+    left: 0;
+    top: 274px;
+    bottom: 0;
+    width: 320px;
+    margin: 0 10px;
+}
+
+.indexBox {
+    overflow: hidden;
+    position: relative;
+    box-sizing: border-box;
+    padding: 4px 0;
+    font-family: Menlo, Consolas, monospace;
+    font-size: 16px;
+    display: block;
+    width: 40px;
+    background-color: chocolate;
+    border-radius: 6px 0 0 6px;
+    height: 100%;
+    color: #ecf0f1;
+}
+
+.instructionIndex {
+    box-sizing: border-box;
+    height: 20px;
+    line-height: 20px;
+    text-align: right;
+    padding-right: 6px;
+}
+
+.listBox {
+    height: 100%;
+    position: relative;
+}
+
+textarea {
+    box-sizing: border-box;
+    border: 1px solid chocolate;
+    border-left:none;
+    padding: 4px 10px;
+    font-family: Menlo, Consolas, monospace;
+    font-size: 16px;
+    line-height: 20px;
+    color: chocolate;
+    position: absolute;
+    top: 0;
+    left: 40px;
+    height: 100%;
+    width: 280px;
+    border-radius: 0 6px 6px 0;
+    resize: none;
+    outline: none;
+    display: block;
+    background-color: white;
+}
