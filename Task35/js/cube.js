@@ -22,7 +22,7 @@ function newCube(amount) {
             cube.rotate();
         };
         var img = document.createElement("img");
-        img.src = "head.png";
+        img.src = "img/head.png";
         img.style.width = cube.sz + "px";
         img.style.height = cube.sz + "px";
         cube.appendChild(img);
