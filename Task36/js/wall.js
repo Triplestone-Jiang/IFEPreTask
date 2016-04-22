@@ -9,7 +9,13 @@ function wall() {
                 walls[x + "," + y].setAttribute("style", "background-color:gray;position:absolute;transition:all 0.6s;width:" + sz + "px;height:" + sz + "px;top:" + (y * sz) + "px;left:" + (x * sz) + "px;");
                 table.appendChild(walls[x + "," + y]);
             } else {
-                console.log("the wall has already existed, look the walls'positions:", walls);
+                var coordinates=[];
+                for(var item in walls){
+                    if(walls.hasOwnProperty(item)){
+                        coordinates.push("("+item+")");
+                    }
+                }
+                console.log("the wall has already existed, look the walls'positions:",coordinates);
             }
             return self;
         },
@@ -19,7 +25,6 @@ function wall() {
         getWall:function () {
             return walls;
         }
-
     };
     return self;
 }

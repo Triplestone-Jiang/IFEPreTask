@@ -16,25 +16,8 @@ function Handler() {
         deg = deg < 0 ? deg + 360 : deg;
         return deg;
     };
-    this.move = function (deg, i) {
-        switch (deg) {
-            case 0:
-                cube.y = (cube.y + i) > amount ? cube.y : cube.y + i;
-                break;
-            case 90:
-                cube.x = (cube.x - i) < 1 ? cube.x : cube.x - i;
-                break;
-            case 180:
-                cube.y = (cube.y - i) < 1 ? cube.y : cube.y - i;
-                break;
-            case 270:
-                cube.x = (cube.x + i) > amount ? cube.x : cube.x + i;
-                break;
-        }
-        cube.move(cube.x, cube.y);
-    };
     this.go = function (i) {
-        j = i ? i : 1;
+        var j = i === undefined ? 1 : i;
         this.move(this.calDeg(), j);
     };
     this.movlef = function (i) {
@@ -58,20 +41,16 @@ function Handler() {
         this.go(i);
     };
     this.tralef = function (i) {
-        cube.x = (cube.x - i) < 1 ? cube.x : cube.x - i;
-        cube.move(cube.x, cube.y);
+        (cube.x - i) < 1 ? console.log("the movement is apparently out of range") : checkWall(cube.x - i, 1);
     };
     this.trarig = function (i) {
-        cube.x = (cube.x + i) > amount ? cube.x : cube.x + i;
-        cube.move(cube.x, cube.y);
+        (cube.x + i) > amount ? console.log("the movement is apparently out of range") : checkWall(cube.x + i, 1);
     };
     this.tratop = function (i) {
-        cube.y = (cube.y - i) < 1 ? cube.y : cube.y - i;
-        cube.move(cube.x, cube.y);
+        (cube.y - i) < 1 ? console.log("the movement is apparently out of range") : checkWall(cube.y - i, 0);
     };
     this.trabot = function (i) {
-        cube.y = (cube.y + i) > amount ? cube.y : cube.y + i;
-        cube.move(cube.x, cube.y);
+        (cube.y + i) > amount ? console.log("the movement is apparently out of range") : checkWall(cube.y + i, 0);
     };
     this.wallPosition = function (deg) {
         switch (deg) {
@@ -109,15 +88,15 @@ function Handler() {
         var currentWall = newWall.getWall();
         var x = Math.floor(Math.random() * (amount - 1) + 1);
         var y = Math.floor(Math.random() * (amount - 1) + 1);
-        if (!currentWall[x + "," + y]) {
-            newWall.build(x, y);
-        } else {
+        if (currentWall[x + "," + y] || (cube.x === x && cube.y === y)) {
             return h.randomWall();
+        } else {
+            newWall.build(x, y);
         }
     };
     this.build = function () {
         var position = h.wallPosition(h.calDeg());
-        if(position[0]){
+        if (position) {
             newWall.build(position[0], position[1]);
         }
     };
@@ -201,6 +180,55 @@ function Handler() {
         }
 
     };
+    this.move = function (deg, i) {
+        switch (deg) {
+            case 0:
+                (cube.y + i) > amount ? console.log("the movement is apparently out of range") : checkWall(cube.y + i, 0);
+                break;
+            case 90:
+                (cube.x - i) < 1 ? console.log("the movement is apparently out of range") : checkWall(cube.x - i, 1);
+                break;
+            case 180:
+                (cube.y - i) < 1 ? console.log("the movement is apparently out of range") : checkWall(cube.y - i, 0);
+                break;
+            case 270:
+                (cube.x + i) > amount ? console.log("the movement is apparently out of range") : checkWall(cube.x + i, 1);
+                break;
+        }
+    };
+
+    function checkWall(newCoordinate, dir) {
+        var oldCoordinate;
+        var x;
+        var y;
+        var currentWall = newWall.getWall();
+        if (dir) {
+            x = newCoordinate;
+            oldCoordinate = cube.x;
+            y = cube.y;
+            for (var i = oldCoordinate; i < newCoordinate + 1; i++) {
+                if (currentWall[i + "," + y]) {
+                    console.log("it seems I cannot walk into the wall, right?");
+                    return;
+                }
+            }
+            cube.x = x;
+            cube.move(cube.x, cube.y);
+        } else {
+            y = newCoordinate;
+            x = cube.x;
+            oldCoordinate = cube.y;
+            for (i = oldCoordinate; i < newCoordinate + 1; i++) {
+                if (currentWall[x + "," + i]) {
+                    console.log("it seems I cannot walk into the wall, right?");
+                    return;
+                }
+            }
+            cube.y = y;
+            cube.move(cube.x, cube.y);
+        }
+    }
+
     function delay(fn, arg, t) {
         var timer;
         var self;

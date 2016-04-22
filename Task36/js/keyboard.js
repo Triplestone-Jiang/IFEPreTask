@@ -44,6 +44,6 @@ function keyboard() {
     }, false);
 
     h.sortInput();
-    h.sortIndex(h.chain.length + 1);
+    h.sortIndex(h.chain.length);
 }
 keyboard();
