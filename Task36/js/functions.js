@@ -204,27 +204,41 @@ function Handler() {
         var currentWall = newWall.getWall();
         if (dir) {
             x = newCoordinate;
-            oldCoordinate = cube.x;
             y = cube.y;
-            for (var i = oldCoordinate; i < newCoordinate + 1; i++) {
+            oldCoordinate = cube.x;
+            step = 1;
+            if (x < oldCoordinate) {
+                var temp = x;
+                x = oldCoordinate;
+                oldCoordinate = temp;
+                step = -1;
+            }
+            for (var i = oldCoordinate; i < x + 1; i += step) {
                 if (currentWall[i + "," + y]) {
                     console.log("it seems I cannot walk into the wall, right?");
                     return;
                 }
             }
-            cube.x = x;
+            cube.x = newCoordinate;
             cube.move(cube.x, cube.y);
         } else {
-            y = newCoordinate;
             x = cube.x;
+            y = newCoordinate;
             oldCoordinate = cube.y;
-            for (i = oldCoordinate; i < newCoordinate + 1; i++) {
+            step = 1;
+            if (y < oldCoordinate) {
+                temp = y;
+                y = oldCoordinate;
+                oldCoordinate = temp;
+                step = -1;
+            }
+            for (i = oldCoordinate; i < y + 1; i += step) {
                 if (currentWall[x + "," + i]) {
                     console.log("it seems I cannot walk into the wall, right?");
                     return;
                 }
             }
-            cube.y = y;
+            cube.y = newCoordinate;
             cube.move(cube.x, cube.y);
         }
     }
