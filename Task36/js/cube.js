@@ -1,10 +1,11 @@
 function newCube(amount) {
     function Cube() {
+        window.t=50;
         var cube = document.createElement("div");
         cube.x = 1;
         cube.y = 1;
         cube.sz = 600 / amount;
-        cube.setAttribute("style", "position:absolute;transition:all 0.6s;width:" + cube.sz + "px;height:" + cube.sz + "px");
+        cube.setAttribute("style", "position:absolute;transition:all "+t+"ms;width:" + cube.sz + "px;height:" + cube.sz + "px");
         cube.deg = 0;
         cube.move = function () {
             cube.style.left = cube.x * cube.sz + "px";

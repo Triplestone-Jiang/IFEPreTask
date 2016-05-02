@@ -41,16 +41,20 @@ function Handler() {
         this.go(i);
     };
     this.tralef = function (i) {
-        (cube.x - i) < 1 ? console.log("the movement is apparently out of range") : checkWall(cube.x - i, 1);
+        var j=i===undefined?1:i;
+        (cube.x - j) < 1 ? console.log("the movement is apparently out of range") : checkWall(cube.x - j, 1);
     };
     this.trarig = function (i) {
-        (cube.x + i) > amount ? console.log("the movement is apparently out of range") : checkWall(cube.x + i, 1);
+        var j=i===undefined?1:i;
+        (cube.x + j) > amount ? console.log("the movement is apparently out of range") : checkWall(cube.x + j, 1);
     };
     this.tratop = function (i) {
-        (cube.y - i) < 1 ? console.log("the movement is apparently out of range") : checkWall(cube.y - i, 0);
+        var j=i===undefined?1:i;
+        (cube.y - j) < 1 ? console.log("the movement is apparently out of range") : checkWall(cube.y - j, 0);
     };
     this.trabot = function (i) {
-        (cube.y + i) > amount ? console.log("the movement is apparently out of range") : checkWall(cube.y + i, 0);
+        var j=i===undefined?1:i;
+        (cube.y + j) > amount ? console.log("the movement is apparently out of range") : checkWall(cube.y + j, 0);
     };
     this.wallPosition = function (deg) {
         switch (deg) {
@@ -109,6 +113,18 @@ function Handler() {
             console.log("no walls here, you want to brush the air?");
         }
     };
+    this.findPaths = function (endIndex) {
+        var path = findPath(endIndex);
+        if (path) {
+            for (var i = 0; i < path.length; i++) {
+                ini.delay(function (a) {
+                    cube.x = a % amount + 1;
+                    cube.y = Math.floor(a / amount) + 1;
+                    cube.move();
+                }, path[i], t)
+            }
+        }
+    };
     this.chain = [];
 
     this.sortInput = function () {
@@ -125,7 +141,7 @@ function Handler() {
         listBox.innerHTML = innerHTML;
     };
     this.execute = function () {
-        var reg = [/^(go) *(\d*)$/i, /^(tun) +(lef|rig|bac)$/i, /^(mov) +(lef|top|rig|bot) *(\d*)$/i, /^(tra) +(lef|top|rig|bot) *(\d*)$/i, /^(build)$/i, /^(bru) *(#?\w+)/i];
+        var reg = [/^(go) *(\d*)$/i, /^(tun) +(lef|rig|bac)$/i, /^(mov) +(lef|top|rig|bot) *(\d*)$/i, /^(tra) +(lef|top|rig|bot) *(\d*)$/i, /^(build)$/i, /^(bru) *(.+)/i, /^(mov to) *(\d\d?,\d\d?)$/i];
         h.sortInput();
         var cmd = [];
         var err = [];
@@ -135,6 +151,10 @@ function Handler() {
                 if (matches) {
                     if (matches[3]) {
                         cmd.push([matches[1] + matches[2], matches[3]]);
+                    } else if (matches[1].toLowerCase() === "mov to") {
+                        var arr = matches[2].split(",");
+                        var index = +arr[0] - 1 + (+arr[1] - 1) * amount;
+                        cmd.push(["findPaths", index]);
                     } else if (matches[2] && parseInt(matches[2], 10)) {
                         cmd.push([matches[1], matches[2]]);
                     } else if (matches[1].toLowerCase() === "bru") {
@@ -157,7 +177,7 @@ function Handler() {
             })
         } else {
             var first = cmd.shift();
-            var ini = delay(function (i) {
+            ini.delay(function (i) {
                 var j = +i ? +i : i;
                 h[first[0]](j);
                 listBox.childNodes[0].style.backgroundColor = "white";
@@ -171,12 +191,12 @@ function Handler() {
                     listBox.childNodes[index].style.color = "white";
                     listBox.childNodes[index + 1].style.backgroundColor = "white";
                     listBox.childNodes[index + 1].style.color = "chocolate";
-                }, item[1], 600);
+                }, item[1], t);
             });
             ini.delay(function () {
                 listBox.childNodes[cmd.length].style.backgroundColor = "chocolate";
                 listBox.childNodes[cmd.length].style.color = "white";
-            }, "", 600);
+            }, "", t);
         }
 
     };
@@ -206,14 +226,12 @@ function Handler() {
             x = newCoordinate;
             y = cube.y;
             oldCoordinate = cube.x;
-            step = 1;
             if (x < oldCoordinate) {
                 var temp = x;
                 x = oldCoordinate;
                 oldCoordinate = temp;
-                step = -1;
             }
-            for (var i = oldCoordinate; i < x + 1; i += step) {
+            for (var i = oldCoordinate; i < x + 1; i++) {
                 if (currentWall[i + "," + y]) {
                     console.log("it seems I cannot walk into the wall, right?");
                     return;
@@ -225,14 +243,12 @@ function Handler() {
             x = cube.x;
             y = newCoordinate;
             oldCoordinate = cube.y;
-            step = 1;
             if (y < oldCoordinate) {
                 temp = y;
                 y = oldCoordinate;
                 oldCoordinate = temp;
-                step = -1;
             }
-            for (i = oldCoordinate; i < y + 1; i += step) {
+            for (i = oldCoordinate; i < y + 1; i++) {
                 if (currentWall[x + "," + i]) {
                     console.log("it seems I cannot walk into the wall, right?");
                     return;
@@ -271,6 +287,9 @@ function Handler() {
         };
         return self.delay(fn, arg, t)
     }
+
+    window.ini = delay(function () {
+    }, "", 0);
 }
 var inst = document.getElementById("instruction");
 var listBox = document.getElementById("listBox");

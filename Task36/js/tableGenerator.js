@@ -47,7 +47,7 @@ function tableGenerator(amount) {
     }
 
     var css1 = "#box{position:relative;font-family: 'Microsoft YaHei',Arial,sans-serif;box-sizing: border-box;border-collapse: collapse;text-align: center;color:#888888;}";
-    var css2 = "td[data-type]{box-sizing: border-box;border: 1px solid #bdc3c7;cursor:pointer;width:" + 600 / amount + "px;height:" + 600 / amount + "px}";
+    var css2 = "td[data-type]{background-color:transparent;z-index:999;box-sizing: border-box;border: 1px solid #bdc3c7;cursor:pointer;width:" + 600 / amount + "px;height:" + 600 / amount + "px}";
     var css3 = "td[data-type*='-axis']{border:none;cursor:default}";
     generateCSS(css1, css2, css3);
 }

@@ -16,24 +16,20 @@
     var refresh = document.getElementById("refresh");
     var execute = document.getElementById("execute");
     var size = document.getElementById("size");
-    var buildWall=document.getElementById("buildWall");
-    var randomWall=document.getElementById("randomWall");
-    var brushColor=document.getElementById("brushColor");
+    var buildWall = document.getElementById("buildWall");
+    var randomWall = document.getElementById("randomWall");
+    var brushColor = document.getElementById("brushColor");
 
     tableCubesArray = tableCubesArray.filter(function (item) {
         return (item.getAttribute("data-type") === "cube");
     });
 
-    table.addEventListener("click", function (ev) {
+    table.onclick = function (ev) {
         if (ev.target.nodeName.toLowerCase() === "td") {
             var index = tableCubesArray.indexOf(ev.target);
-            if (index + 1) {
-                cube.x = index % amount + 1;
-                cube.y = Math.floor(index / amount) + 1;
-                cube.move(cube.x, cube.y);
-            }
+            h.findPaths(index);
         }
-    }, false);
+    };
 
     tunlef.onclick = h.tunlef;
     tunrig.onclick = h.tunrig;
@@ -66,19 +62,26 @@
     trabot.onclick = function () {
         h.trabot(1);
     };
-    refresh.onclick = cube.reset;
+    refresh.onclick = function () {
+        cube.reset();
+        newWall.reset();
+    };
     size.onchange = function () {
         amount = +this.value;
         tableGenerator(amount);
         newCube(amount);
         et();
-        newWall=null;
-        newWall=wall();
+        newWall = null;
+        newWall = wall();
     };
     execute.onclick = h.execute;
-    buildWall.onclick=h.build;
-    randomWall.onclick=h.randomWall;
-    brushColor.onclick=function () {
+    buildWall.onclick = h.build;
+    randomWall.onclick = function () {
+        for (var i = 0; i < 10; i++) {
+            h.randomWall();
+        }
+    };
+    brushColor.onclick = function () {
         h.bru("red");
     }
 })();
