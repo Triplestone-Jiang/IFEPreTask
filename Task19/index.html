@@ -2,23 +2,21 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Task 19</title>
-    <link rel="stylesheet" href="style.css">
+    <title>排序算法演示</title>
+    <link rel="stylesheet" href="dist/style/style.css">
 </head>
 <body>
-    <label for="input">Please Input Number:</label>
-    <input type="text" id="input" placeholder="10 ~ 100">
-    <button id="leftIn" class="buttons">leftIn</button>
-    <button id="rightIn" class="buttons">rightIn</button>
-    <button id="leftOut" class="buttons">leftOut</button>
-    <button id="rightOut" class="buttons">rightOut</button>
-    <button id="random50" class="buttons">random50</button>
-    <button id="bubblingSort" class="buttons">bubblingSort</button>
-    <button id="quickSort" class="buttons">quickSort</button>
-    <button id="cancelAnimation" class="buttons">cancelAnimation</button>
-    <label for="timeInterval">Set Time Interval(ms):</label>
-    <input type="text" id="timeInterval" value="100">
-    <div id="display"></div>
-    <script src="task19.js"></script>
+<h1>排序算法演示</h1>
+<div id="panel" class="panel">
+    <label for="number">数量:</label>
+    <input type="text" id="number" value="20">
+    <label for="time">速度(ms):</label>
+    <input type="text" id="time" value="500">
+    <button class="sort">bubblingSort</button>
+    <button class="sort">exchangeSort</button>
+    <button class="sort">quickSort</button>
+</div>
+<div class="container"></div>
+<script src="dist/js/main.js"></script>
 </body>
 </html>
